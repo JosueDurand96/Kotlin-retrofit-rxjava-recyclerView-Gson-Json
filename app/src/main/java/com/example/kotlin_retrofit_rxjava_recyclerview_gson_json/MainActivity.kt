@@ -5,6 +5,7 @@ import android.os.Bundle
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import rx.schedulers.Schedulers
 
 class MainActivity : AppCompatActivity() {
 
@@ -18,6 +19,11 @@ class MainActivity : AppCompatActivity() {
             .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
             .build()
 
-
+        val apiMovies = retrofit.create(ApiMovies::class.java)
+        apiMovies.getMovies()
+            .su(Schedulers.io())
+            .su
     }
 }
+
+
